@@ -25,7 +25,8 @@ addButton.addEventListener('click',function(){
     const itemQuantity = getInputValue('item-quantity-input');
     const tr = document.createElement('tr');
     const totalPrice = itemPrice * itemQuantity;
-
+    const  totalPriceValue = document.getElementsByClassName('total-price');
+    console.log(totalPriceValue);
     const tableData = `
             <th >${getInputValue('item-name-input')}</th>
             <td>${itemPrice}</td>
