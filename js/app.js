@@ -21,20 +21,59 @@ function getInputValue(inputId){
 addButton.addEventListener('click',function(){
     const tableValue = document.getElementById('info-table');
     // getInputValue('item-name-input');
+    const itemName = getInputValue('item-name-input')
     const itemPrice = getInputValue('item-price-input');
     const itemQuantity = getInputValue('item-quantity-input');
+    // condition 
+    if(itemName > 0 && itemQuantity > 0 &&itemPrice > 0){
     const tr = document.createElement('tr');
     const totalPrice = itemPrice * itemQuantity;
-    const  totalPriceValue = document.getElementsByClassName('total-price');
-    console.log(totalPriceValue);
+
     const tableData = `
-            <th >${getInputValue('item-name-input')}</th>
+            <th >${itemName}</th>
             <td>${itemPrice}</td>
             <td>${itemQuantity}</td>
             <td class ="total-price">${totalPrice}</td>
-`;
-console.log(tableData);
-tr.innerHTML = tableData;
-tableValue.appendChild(tr);
+    `;
+    tr.innerHTML = tableData;
+    tableValue.appendChild(tr);
+    // subTotal calling 
+    const subTotal = document.getElementById('sub-total');
+    const subTotalValues = getSubTotal();
+    subTotal.innerText = subTotalValues;
+    console.log('subtotal',subTotalValues);
+    // tax 
+    const tax =  document.getElementById('tax');
+    const taxValue = (subTotalValues * .2).toFixed(2);
+    console.log('tax',taxValue);
+
+    tax.innerText = taxValue;
+    // total grand value 
+    const grand= document.getElementById('grand-total');
+    const taxConvert = parseFloat(taxValue)
+
+    const grandTotal = subTotalValues + taxConvert ;
+    grand.innerText = grandTotal;
+    document.getElementById('grand-total-2').innerText = grandTotal;
+
+    }else{
+        alert("please field the input value!")
+    }
 
 })
+// suba total calculation function 
+function getSubTotal(){
+     // sub total calculation 
+     const  totalPriceValue = document.getElementsByClassName('total-price');
+    //  const totalPriceValuesText = totalPriceValues.innerText;
+     
+     let sum = 0;
+     for(let i=0; i < totalPriceValue.length; i++){
+         let element = totalPriceValue[i];
+         const cost = parseFloat(element.innerText);
+         sum = sum + cost;
+        //  console.log(subTotalConvert);
+        }
+        console.log('sum',sum);
+        return sum;
+}
