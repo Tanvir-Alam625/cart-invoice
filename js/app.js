@@ -8,8 +8,13 @@ console.log(addButton);
 submitButton.addEventListener('click',function(){
 const detailsInput = document.getElementById('buyer-details-input');
 const detailsInputValue = detailsInput.value;
-document.getElementById('buyer-info').innerText = detailsInputValue;
-console.log(detailsInput);
+if(detailsInputValue.length > 0){
+    document.getElementById('buyer-info').innerText = detailsInputValue;
+    detailsInput.value = "";
+}else{
+    alert('Please enter your information!');
+}
+
 });
 function getInputValue(inputId){
     const input = document.getElementById(inputId);
@@ -25,7 +30,7 @@ addButton.addEventListener('click',function(){
     const itemPrice = getInputValue('item-price-input');
     const itemQuantity = getInputValue('item-quantity-input');
     // condition 
-    if(itemName > 0 && itemQuantity > 0 &&itemPrice > 0){
+    if(itemName.length > 0 && itemQuantity.length > 0 &&itemPrice.length > 0){
     const tr = document.createElement('tr');
     const totalPrice = itemPrice * itemQuantity;
 
